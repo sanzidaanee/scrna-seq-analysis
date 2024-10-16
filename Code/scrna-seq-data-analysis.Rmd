@@ -1339,6 +1339,7 @@ n_cells <- FetchData(seurat_subset_labeled,
         dplyr::count(celltype, sample)
 
 # Barplot of number of cells per celltype by sample
+
 ggplot(n_cells, aes(x=celltype, y=n, fill=sample)) +
     geom_bar(position=position_dodge(), stat="identity") +
     geom_text(aes(label=n), vjust = -.2, position=position_dodge(1))
@@ -1350,23 +1351,8 @@ ggplot(n_cells, aes(x=celltype, y=n, fill=sample)) +
 
 ```{r}
 # Subset seurat object to just B cells
-seurat_b_cells <- subset(seurat_subset_labeled, subset = (celltype == "B cells"))
-
-# Run a wilcox test to compare ctrl vs stim
-b_markers <- FindMarkers(seurat_b_cells,
-                                    ident.1 = "ctrl",
-                                    ident.2 = "stim",
-                                    grouping.var = "sample",
-                                    only.pos = FALSE,
-                                    logfc.threshold = 0.25)
-```
 
 
-
-
-
-
-```{r}
 # Subset seurat object to just B cells
 # Check available identities in the Seurat object
 Idents(seurat_b_cells)
